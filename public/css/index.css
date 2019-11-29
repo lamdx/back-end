@@ -1,0 +1,33 @@
+a:hover,
+a:active,
+a:focus {
+  text-decoration: none; }
+
+.ad_aside {
+  width: 180px; }
+
+.ad_section {
+  width: 100%;
+  padding-left: 180px; }
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: ">"; }
+
+.jumbotron {
+  border-radius: 0; }
+
+.card {
+  border-radius: 0; }
+
+.list-group-item.active {
+  background-color: #343a40;
+  border: 0; }
+
+.list-group-item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }

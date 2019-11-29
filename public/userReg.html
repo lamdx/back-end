@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>register</title>
+    <link
+      rel="stylesheet"
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="text-center">
+        <img
+          class="mb-2"
+          src="img/avatar-default.png"
+          alt=""
+          width="72"
+          height="72"
+        />
+      </div>
+      <h1 class="h3 mb-2 font-weight-normal text-center">用户注册</h1>
+      <form class="form-signin">
+        <div id="msg"></div>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label for="eid">工号</label>
+            <input
+              type="text"
+              class="form-control"
+              id="eid"
+              name="eid"
+              placeholder="请输入工号"
+              autofocus
+            />
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="user_name">姓名</label>
+            <input
+              type="text"
+              class="form-control"
+              name="user_name"
+              id="user_name"
+              placeholder="请输入姓名"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label for="pwd">登录密码</label>
+            <input
+              type="password"
+              class="form-control"
+              name="pwd"
+              id="pwd"
+              placeholder="请输入密码"
+            />
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="cpwd">确认密码</label>
+            <input
+              type="password"
+              class="form-control"
+              name="cpwd"
+              id="cpwd"
+              placeholder="请输入确认密码"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label for="email">邮箱</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              id="email"
+              placeholder="请输入邮箱"
+            />
+          </div>
+          <div class="col-md-6 mb-2">
+            <label for="phone">手机</label>
+            <input
+              type="phone"
+              class="form-control"
+              name="phone"
+              id="phone"
+              placeholder="请输入手机号码"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <label for="">性别：</label>
+            <input type="radio" name="gender" checked id="m" value="1" />
+            <label for="m">男</label>
+            <input type="radio" name="gender" id="f" value="0" />
+            <label for="f">女</label>
+          </div>
+          <div class="col-md-6 mb-2">
+            <div class="message">
+              <p>已有账号？<a href="login.html">点击登录</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <button class="btn btn-success btn-block offset-md-6">注册</button>
+          </div>
+        </div>
+        <p class="mt-2 mb-2 text-muted text-center">&copy; 2017-2020</p>
+      </form>
+    </div>
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="js/userReg.js"></script>
+  </body>
+</html>
