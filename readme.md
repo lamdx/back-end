@@ -11,3 +11,17 @@ npm i cors morgan
 ```shell
 npm i crypto
 ```
+
+http://localhost:3000/sms/13510740753
+
+## 支付宝支付 文档
+
+```shell
+npm i alipay-sdk
+```
+
+https://hacpai.com/article/1572500884644
+https://github.com/xiluotop/NodeJS-Alipay-Demo?utm_source=hacpai.com
+C:\Users\web\Documents\支付宝开放平台开发助手\RSA 密钥
+prdnpo5113@sandbox.com
+http://localhost:3000/pay.html

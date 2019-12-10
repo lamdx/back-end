@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <button id="buy">付款</button>
+    <script>
+      $("#buy").click(function() {
+        // if (!$('#username').val().trim()) {
+        //     alert('请输入用户名！');
+        //     return;
+        // }
+        // var goodsName = goods[$("#goods").val()].name;
+        // var count = $(".count").val();
+        // var price = goods[$("#goods").val()].price;
+        // var cost = $("#total").html();
+        var goodsName = "小米";
+        var count = 5;
+        var price = 20;
+        var cost = 100;
+        var payName = "root";
+        // 像服务器发送付款请求确认
+        $.ajax({
+          url: "http://localhost:3000/payinfo",
+          data: {
+            payName: payName,
+            goodsName: goodsName,
+            count: count,
+            price: price,
+            cost: cost
+          },
+          success: res => {
+            // 请求正确时接收服务器的响应，再次确认是否需要生成订单
+            if (res.code === 200) {
+              let info = `
+                购买人：${res.payName}\n
+                购买商品：${res.goodsName}\n
+                商品单价：￥${res.price}\n
+                购买个数：${res.count}\n
+                总共价钱：￥${res.cost}\n
+                确认创建订单进行购买吗？
+                `;
+              if (confirm(info)) {
+                // 利用 ajax 发送订单生成订单请求
+                $.ajax({
+                  type: "post",
+                  url: "http://localhost:3000/createOrder",
+                  data: {
+                    payName: payName,
+                    goodsName: goodsName,
+                    price: price,
+                    count: count,
+                    cost: cost
+                  },
+                  // 服务器向支付宝请求订单后，返回的是一个form表单，需要插入到浏览器中进行自动跳转
+                  success: function(res) {
+                    $("body").append($(res));
+                  }
+                });
+              }
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
