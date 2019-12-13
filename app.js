@@ -31,6 +31,8 @@ const backRouter = require("./router/router");
 const smsRouter = require("./router/sms/sms");
 // 引入Alipay支付接口
 const alipayRouter = require("./router/alipay/alipay");
+// 引入地址模块
+const addressRouter = require("./router/address/address");
 
 // 创建web服务器
 let app = express();
@@ -122,6 +124,7 @@ app.use("/order", orderRouter);
 app.use(backRouter);
 app.use(smsRouter);
 app.use(alipayRouter);
+app.use(addressRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,7 +1,9 @@
 const express = require("express");
 // 引入连接池模块
-const pool = require("../../pool");
-// console.log(pool)
+// const pool = require("../../pool");
+
+// 引入连接池query模块
+const query = require("../../pool");
 
 // 创建路由器对象
 let router = express.Router();
@@ -12,8 +14,7 @@ router.get("/v1/login/:eid&:pwd", (req, res) => {
   let $eid = req.params.eid;
   let $pwd = req.params.pwd;
   let sql = "select * from user where eid = ? and pwd = ?";
-  pool.query(sql, [$eid, $pwd], (err, result) => {
-    if (err) throw err;
+  query(sql, [$eid, $pwd]).then(result => {
     if (result.length > 0) {
       req.session.user = result[0];
       return res.send("1");
@@ -52,15 +53,9 @@ router.delete("/v1/deluser/:uid", (req, res) => {
 router.get("/v1/searchuser/:eid", (req, res) => {
   let $eid = req.params.eid;
   let sql = "select * from user where eid = ?";
-  pool.query(sql, [$eid], (err, result) => {
-    if (err) throw err;
-    // console.log(result);
+  query(sql, [$eid]).then(result => {
     // 查询数据库得到的是对象数组
-    if (result.length > 0) {
-      res.send(result[0]);
-    } else {
-      res.send("0");
-    }
+    result.length > 0 ? res.send(result[0]) : res.send("0");
   });
 });
 
@@ -86,32 +81,18 @@ router.put("/v1/updateuser", (req, res) => {
     return res.send("-4");
   }
   let sql = "update user set pwd = ? where eid = ? and pwd = ?;";
-  pool.query(sql, [obj.pwd, obj.eid, obj.opwd], (err, result) => {
-    if (err) throw err;
-    console.log(result);
-    if (result.affectedRows > 0) {
-      // 更改成功
-      res.send("1");
-    } else {
-      res.send("0");
-    }
-  });
+  query(sql, [obj.pwd, obj.eid, obj.opwd]).then(result =>
+    result.affectedRows > 0 ? res.send("1") : res.send("1")
+  );
 });
 
 // 6.根据工号查询用户是否存在 get
 router.get("/v1/checkeid/:eid", (req, res) => {
   let $eid = req.params.eid;
   let sql = "select * from user where eid = ?";
-  pool.query(sql, [$eid], (err, result) => {
-    if (err) throw err;
-    if (result.length > 0) {
-      // 用户名存在
-      return res.send("0");
-    } else {
-      // 用户名不存在
-      return res.send("1");
-    }
-  });
+  query(sql, [$eid]).then(result =>
+    result.length > 0 ? res.send("0") : res.send("1")
+  );
 });
 
 // 7.注册新用户 post
@@ -142,25 +123,18 @@ router.post("/v1/reguser", (req, res) => {
   delete obj.cpwd;
   // 用户名/手机号码验证唯一
   let sql = "select * from user where eid = ? or phone = ?";
-  pool.query(sql, [obj.eid, obj.phone], (err, result) => {
-    if (err) throw err;
+  query(sql,[obj.eid, obj.phone]).then(result=>{
     if (result.length > 0) {
       // 用户名/手机号码已存在
       return res.send("0");
     } else {
       // 用户名不存在
       let sql = "insert into user set ? ";
-      pool.query(sql, [obj], (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        if (result.affectedRows > 0) {
-          res.send("1");
-        } else {
-          res.send("2");
-        }
-      });
+      query(sql,[obj]).then(result=>{
+        result.affectedRows > 0?res.send("1"):res.send("2")
+      })
     }
-  });
+  })
 });
 
 // 8.退出登录
