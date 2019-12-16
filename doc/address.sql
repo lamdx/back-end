@@ -1,8 +1,3 @@
-SET NAMES UTF8;
-DROP DATABASE IF EXISTS eb;
-CREATE DATABASE eb CHARSET=UTF8;
-USE eb;
-
 CREATE TABLE `address` (
   `id` int(11) NOT NULL,
   `name` varchar(16) NOT NULL,

@@ -80,7 +80,7 @@ router.post("/notify.html", (req, res) => {
       // console.log(req.body);
       let data = req.body;
       let goods = JSON.parse(data.passback_params);
-      let sql = `insert into order_list value("${data.out_trade_no}",
+      let sql = `insert into paylist value("${data.out_trade_no}",
                 "${data.trade_no}",
                 "${goods.goodsName}",
                 ${goods.price},
@@ -90,10 +90,11 @@ router.post("/notify.html", (req, res) => {
                 "${goods.payName}");`;
       // 响应支付宝 success 处理成功，否则支付宝会一直定时发送异步通知
       res.end("success");
-      pool.query(sql, (err, result) => {
-        if (err) throw err;
-        res.send(result);
-      });
+      // pool.query(sql, (err, result) => {
+      //   if (err) throw err;
+      //   res.send(result);
+      // });
+      query(sql, {}).then(result => res.send(result));
     }
   }
   checkResult(req.body);

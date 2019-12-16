@@ -1,10 +1,4 @@
-SET NAMES UTF8;
-DROP DATABASE IF EXISTS alipay;
-CREATE DATABASE alipay CHARSET=UTF8;
-USE alipay;
-
-DROP TABLE IF EXISTS `order_list`;
-CREATE TABLE `order_list` (
+CREATE TABLE `paylist` (
   `out_trade_no` varchar(255) NOT NULL,
   `trade_no` varchar(255) NOT NULL,
   `goods_name` varchar(255) NOT NULL,
@@ -15,4 +9,4 @@ CREATE TABLE `order_list` (
   `payName` varchar(255) NOT NULL
 );
 
-INSERT INTO `order_list` VALUES ('1', '1', '1', 1, 1, 1, '1', '1');
+INSERT INTO `paylist` VALUES ('1', '1', '1', 1, 1, 1, '1', '1');
