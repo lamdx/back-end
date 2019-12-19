@@ -1,6 +1,4 @@
 const express = require("express");
-// 引入连接池模块
-// const pool = require("../../pool");
 
 // 引入连接池query模块
 const query = require("../../pool");

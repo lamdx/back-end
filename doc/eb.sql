@@ -52,6 +52,20 @@ INSERT INTO category VALUES(null,'新增特殊物流订单','orderAdd.html',6),
 (null,'配送信息导出','index.html',5),
 (null,'签收单上传','index.html',5);
 
+# 首页轮播图
+CREATE TABLE `carousel` (
+  `id` int(11) NOT NULL,
+  `title` varchar(128) NOT NULL,
+  `imgsrc` varchar(128) NOT NULL,
+  `href` varchar(32) NOT NULL
+);
+
+INSERT INTO `carousel` (`id`, `title`, `imgsrc`, `href`) VALUES 
+(1,"首页轮播图商品1","/img/index/banner1.png","/search"),
+(2,"首页轮播图商品2","/img/index/banner2.png","/cart"),
+(3,"首页轮播图商品3","/img/index/banner3.png","/home"),
+(4,"首页轮播图商品4","/img/index/banner4.png","/member");
+
 # 首页公告
 CREATE TABLE notice(
   `nid` INT PRIMARY KEY AUTO_INCREMENT,

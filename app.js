@@ -33,6 +33,10 @@ const smsRouter = require("./router/sms/sms");
 const alipayRouter = require("./router/alipay/alipay");
 // 引入地址模块
 const addressRouter = require("./router/address/address");
+// 引入购物车模块
+const cartRouter = require("./router/cart/cart");
+// 引入首页模块
+const homeRouter = require("./router/home/home");
 
 // 创建web服务器
 let app = express();
@@ -125,6 +129,8 @@ app.use(backRouter);
 app.use(smsRouter);
 app.use(alipayRouter);
 app.use(addressRouter);
+app.use(cartRouter);
+app.use(homeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
