@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 // 引入连接池模块
-const pool = require("../../pool");
+const query = require("../../pool");
 
 // 创建路由器对象
 let router = express.Router();
@@ -61,14 +61,15 @@ router.post("/createOrder", (req, res) => {
 
 // 支付的信息展示
 router.get("/payresult", (req, res) => {
-  let htmlStr = "";
-  htmlStr += `<p>` + "商户订单号" + ": " + req.query.out_trade_no + "</p>";
-  htmlStr += `<p>` + "支付宝交易订单号" + ": " + req.query.trade_no + "</p>";
-  htmlStr += `<p>` + "交易金额" + ": " + req.query.total_amount + "￥</p>";
-  htmlStr += `<p>` + "交易时间" + ": " + req.query.timestamp + "￥</p>";
-  htmlStr +=
-    '<h1 style:"text-align:center;">支付成功！！！<a href="./index.html">返回首页!</a></h1>';
-  res.send(htmlStr);
+  // let htmlStr = "";
+  // htmlStr += `<p>` + "商户订单号" + ": " + req.query.out_trade_no + "</p>";
+  // htmlStr += `<p>` + "支付宝交易订单号" + ": " + req.query.trade_no + "</p>";
+  // htmlStr += `<p>` + "交易金额" + ": " + req.query.total_amount + "￥</p>";
+  // htmlStr += `<p>` + "交易时间" + ": " + req.query.timestamp + "￥</p>";
+  // htmlStr +=
+  //   '<h1 style:"text-align:center;">支付成功！！！<a href="./index.html">返回首页!</a></h1>';
+  // res.send(htmlStr);
+  res.redirect("http://localhost:8080/cart");
 });
 
 router.post("/notify.html", (req, res) => {
@@ -80,7 +81,7 @@ router.post("/notify.html", (req, res) => {
       // console.log(req.body);
       let data = req.body;
       let goods = JSON.parse(data.passback_params);
-      let sql = `insert into paylist value("${data.out_trade_no}",
+      let sql = `insert into paylist values("${data.out_trade_no}",
                 "${data.trade_no}",
                 "${goods.goodsName}",
                 ${goods.price},
@@ -94,7 +95,7 @@ router.post("/notify.html", (req, res) => {
       //   if (err) throw err;
       //   res.send(result);
       // });
-      query(sql, {}).then(result => res.send(result));
+      query(sql, {}).then(() => console.log(1));
     }
   }
   checkResult(req.body);
