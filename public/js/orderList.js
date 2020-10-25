@@ -10,7 +10,9 @@ $(function() {
   // 加载指定页数据
   function loadPage(page) {
     var $start = $("#tstart").val() || "2019-10-01";
-    var $end = $("#tend").val() || "2019-12-31";
+    var $end =
+      $('#tend').val() ||
+      new Date(new Date().setDate(new Date().getDate() + 30)).format('yyyy-MM-dd');
     var $orderType = $("#orderType").val();
     var $orderNo = $("#orderNo").val() || 0;
     // $("tbody").fadeOut();

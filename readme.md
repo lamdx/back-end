@@ -12,7 +12,7 @@ npm i cors morgan
 npm i crypto
 ```
 
-http://localhost:3000/sms/13510740753
+http://localhost:3000/sms/13510741074
 
 ## 支付宝支付 文档
 
