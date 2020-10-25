@@ -42,7 +42,9 @@ $(function() {
   $("[class='btn btn-primary mx-sm-2 mb-0']").on("click", function(event) {
     event.preventDefault();
     var $start = $("#tstart").val() || "2019-10-01";
-    var $end = $("#tend").val() || "2019-12-31";
+    var $end =
+      $('#tend').val() ||
+      new Date(new Date().setDate(new Date().getDate() + 30)).format('yyyy-MM-dd');
     var $orderType = $("#orderType").val();
     var $orderNo = $("#orderNo").val();
     var $page = 1;
